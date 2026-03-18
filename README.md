@@ -3,10 +3,9 @@
 > 面向大模型/NLP 算法工程师面试准备，基于 fuyao 平台实战演练
 
 ## 环境信息
-- **平台**: fuyao (PPU-ZW810E × 8, 每张 95.6GB)
+- **平台**: (PPU × 8, 每张 95.6GB)
 - **可用 GPU**: GPU 0-7 (8张空闲)
 - **PyTorch**: 2.7.0 | **Transformers**: 4.57.6 | **PEFT**: 0.16.0
-- **进入环境**: `fuyao shell --job-name=bifrost-2026031617060701-huangzh14`
 
 ## 学习大纲
 
@@ -28,20 +27,6 @@
 | 07 | 推理优化与服务化 | `07_inference_optimization.py` | TTFT/TPS、连续批处理、Prefix Cache、Paged Attention |
 | 08 | RAG 系统基础 | `08_rag_basics.py` | 切块、检索、Prompt 组装、RAG 常见坑 |
 
-## 运行方式
-```bash
-# 进入 fuyao shell
-fuyao shell --job-name=bifrost-2026031617060701-huangzh14
-
-# 指定可用 GPU 运行脚本
-# 模型位于公共路径，无需下载
-# /publicdata/huggingface.co/Qwen/Qwen2.5-0.5B-Instruct
-CUDA_VISIBLE_DEVICES=0 python /workspace/huangzh14@xiaopeng.com/llm_learning/01_tokenizer_basics.py
-
-# 第二阶段示例
-CUDA_VISIBLE_DEVICES=0 python /workspace/huangzh14@xiaopeng.com/llm_learning/05_distributed_training.py
-CUDA_VISIBLE_DEVICES=0 python /workspace/huangzh14@xiaopeng.com/llm_learning/06_alignment_and_dpo.py
-```
 
 ## 面试高频考点速查
 - Transformer 为什么用 scaled dot-product attention？
