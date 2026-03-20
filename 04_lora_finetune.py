@@ -136,7 +136,6 @@ class LoRALinear(nn.Module):
             merged_weight = (self.lora_A @ self.lora_B) * self.scaling
             self.original_layer.weight.data += merged_weight.T
 
-
 # 演示手动 LoRA
 print("手动 LoRA 演示:")
 original = nn.Linear(512, 512)
@@ -171,7 +170,7 @@ print("模型路径:", MODEL_PATH)
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_PATH,
-    torch_dtype=torch.float16,
+    dtype=torch.float16,
     device_map={"": device},
     trust_remote_code=True,
 )
@@ -369,7 +368,7 @@ tokens = tokenizer.convert_ids_to_tokens(sample_ids)
 print("\nToken-Level Loss Mask 可视化 (前40个token):")
 for i in range(min(40, len(tokens))):
     mask = "●" if sample_labels[i] != -100 else "○"
-  print(f"  {mask} {tokens[i]}", end="")
+    print(f"  {mask} {tokens[i]}", end="")
     if (i + 1) % 5 == 0:
         print()
 print("\n  ● = 计算 loss, ○ = 不计算 loss (user/system 部分)")
@@ -411,15 +410,15 @@ for epoch in range(num_epochs):
         loss = outputs.loss
 
         # 反向传播
+        optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        optimizer.zero_grad()
 
         epoch_loss += loss.item()
         total_steps += 1
 
     avg_loss = epoch_loss / len(training_examples["input_ids"])
-  print(f"  Epoch {epoch + 1}/{num_epochs} - Loss: {avg_loss:.4f}")
+    print(f"  Epoch {epoch + 1}/{num_epochs} - Loss: {avg_loss:.4f}")
 
 # ============================================================
 # 7. 保存和加载 LoRA 权重
@@ -441,9 +440,9 @@ saved_files = os.listdir(save_dir)
 for f in saved_files:
     size = os.path.getsize(os.path.join(save_dir, f))
     if size > 1024:
-    print(f"  {f}  ({size / 1024:.1f} KB)")
+        print(f"  {f}  ({size / 1024:.1f} KB)")
     else:
-    print(f"  {f}  ({size} bytes)")
+        print(f"  {f}  ({size} bytes)")
 
 print("""
 注意：LoRA 权重通常只有几 MB，而完整模型可能有 GB 级别。

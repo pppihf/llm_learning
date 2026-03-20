@@ -79,7 +79,7 @@ start_time = time.time()
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_PATH,
-    torch_dtype=torch.float16,
+    dtype=torch.float16,
     device_map={"": device},
     trust_remote_code=True,
 )
