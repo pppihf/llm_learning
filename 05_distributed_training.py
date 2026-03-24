@@ -31,23 +31,23 @@ print("""
 ├──────────────────────┼──────────────┼───────────────────────────┤
 │ 参数 (BF16)          │ 2 bytes      │  14 GB                    │
 │ 梯度 (BF16)          │ 2 bytes      │  14 GB                    │
-│ 优化器状态 (FP32)    │ 8 bytes      │  56 GB                    │
+│ 优化器状态 (FP32)    │ 12 bytes     │  84 GB                    │
 │   - 参数主副本       │   4 bytes    │    (AdamW 需要 FP32 副本) │
-│   - 一阶动量 m       │   2 bytes    │                           │
-│   - 二阶动量 v       │   2 bytes    │                           │
+│   - 一阶动量 m       │   4 bytes    │    (FP32，保数值稳定)     │
+│   - 二阶动量 v       │   4 bytes    │    (FP32，保数值稳定)     │
 ├──────────────────────┼──────────────┼───────────────────────────┤
-│ 合计 (不含激活)      │ 12 bytes     │  ~84 GB                   │
+│ 合计 (不含激活)      │ 16 bytes     │  ~112 GB                  │
 │ + 激活 (视序列长度)  │ 变化大       │  额外 10~50+ GB           │
 └──────────────────────┴──────────────┴───────────────────────────┘
 
-结论：7B 模型全量训练至少要 ~100GB，单张 80GB A100 放不下。
+结论：7B 模型全量训练至少要 ~112GB（不含激活），单张 80GB A100 放不下。
 这就是为什么大模型训练必须分布式。
 
 【面试考点】
 Q: 为什么优化器状态占这么多？
 A: AdamW 需要维护每个参数的一阶动量 m 和二阶动量 v，
    都以 FP32 存储（为了数值稳定），再加上 FP32 的参数主副本，
-   所以是 4+2+2=8 bytes/param。
+   所以是 4+4+4=12 bytes/param。加上 BF16 参数和梯度各 2 bytes，总共 16 bytes/param。
 """)
 
 # ============================================================
@@ -113,10 +113,10 @@ for cfg in configs:
     label = cfg.pop("label")
     result = estimate_training_memory(**cfg)
     print(f"\n{label}:")
-    print(f"  参数={result['params_gb']:.1f}GB  梯度={result['grads_gb']:.1f}GB  "
-          f"优化器={result['optimizer_gb']:.1f}GB")
-    print(f"  每卡(不含激活)={result['per_gpu_gb']:.1f}GB  "
-          f"激活≈{result['activation_gb']:.1f}GB  总计≈{result['total_gb']:.1f}GB")
+    print(f"  参数 = {result['params_gb']:.1f} GB  梯度 = {result['grads_gb']:.1f} GB  "
+          f"优化器 = {result['optimizer_gb']:.1f} GB")
+    print(f"  每卡(不含激活) = {result['per_gpu_gb']:.1f} GB  "
+          f"激活 ≈ {result['activation_gb']:.1f} GB  总计 ≈ {result['total_gb']:.1f} GB")
 
 # ============================================================
 # 3. 五种并行策略
@@ -220,6 +220,7 @@ for step in range(accum_steps):
     x = torch.randn(micro_batch, 64)
     target = torch.randint(0, 16, (micro_batch,))
     logits = model(x)
+    print(logits.shape, target.shape)
     loss = loss_fn(logits, target) / accum_steps  # ← 关键：除以累积步数
 
     loss.backward()  # 梯度自动累加到 .grad

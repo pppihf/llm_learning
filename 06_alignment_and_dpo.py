@@ -297,6 +297,7 @@ seq_len = 5
 # 模拟模型输出的 logits
 fake_logits = torch.randn(seq_len, vocab_size)
 fake_token_ids = torch.randint(0, vocab_size, (seq_len,))
+print(fake_token_ids)
 
 # 计算 log probabilities
 log_probs = F.log_softmax(fake_logits, dim=-1)
@@ -342,10 +343,154 @@ ms-swift 中使用 DPO 训练：
 """)
 
 # ============================================================
-# 9. SFT、RLHF、DPO 怎么选？
+# 9. GRPO：不需要 Value Network 的 RL 对齐
 # ============================================================
 print("\n" + "=" * 60)
-print("【9. SFT、RLHF、DPO 对比】")
+print("【9. GRPO：不需要 Value Network 的 RL 对齐】")
+print("=" * 60)
+print("""
+GRPO (Group Relative Policy Optimization) 来自 DeepSeek，
+用于 DeepSeek-R1 的训练，是目前最热门的对齐方法之一。
+
+GRPO 的动机：
+  PPO 需要 4 个模型（策略、参考、RM、价值网络），太重了。
+  DPO 虽然简单，但它只用离线偏好数据，不做在线探索。
+  GRPO 想要：在线 RL 的探索能力 + 不需要额外的价值网络。
+
+核心思想 —— 用"组内相对排名"替代 Value Network：
+  1. 对于每个 prompt，用当前策略采样 G 个回答
+  2. 用 Reward（规则/RM/验证器）给每个回答打分
+  3. 在这 G 个回答的分数内部做标准化 → 得到 advantage
+  4. 用 advantage 做 PPO-style 的策略梯度更新
+
+  传统 PPO:                GRPO:
+  advantage = r - V(s)     advantage = (r - mean(r_group)) / std(r_group)
+  需要 Value Network V     不需要 Value Network！
+
+流程对比：
+  ┌──────────────────────────────────────────────┐
+  │ PPO:  策略 → 生成 → RM打分 → V(s)算advantage │
+  │       → clip surrogate loss → 更新策略+V     │
+  │       需要 4 个模型                           │
+  ├──────────────────────────────────────────────┤
+  │ GRPO: 策略 → 采样G个回答 → 打分              │
+  │       → 组内标准化算advantage → clip loss    │
+  │       → KL惩罚(vs 参考模型) → 更新策略       │
+  │       需要 2 个模型（策略 + 参考）            │
+  └──────────────────────────────────────────────┘
+""")
+
+# 手动实现 GRPO Loss
+print("--- 手动实现 GRPO Loss ---")
+
+
+def grpo_loss(
+    log_probs,          # 当前策略对 G 个回答的 log π, shape (G,)
+    old_log_probs,      # 采样时策略的 log π_old, shape (G,)
+    ref_log_probs,      # 参考模型的 log π_ref, shape (G,)
+    rewards,            # G 个回答的 reward, shape (G,)
+    clip_eps=0.2,
+    beta=0.01,
+):
+    """
+    GRPO Loss 实现
+
+    步骤：
+      1. 组内标准化 reward → advantage
+      2. 计算 importance ratio: π / π_old
+      3. PPO-style clip surrogate loss
+      4. 加 KL 惩罚（当前策略 vs 参考模型）
+    """
+    # Step 1: 组内标准化 → advantage
+    advantage = (rewards - rewards.mean()) / (rewards.std() + 1e-8)
+
+    # Step 2: importance sampling ratio
+    ratio = torch.exp(log_probs - old_log_probs)
+
+    # Step 3: PPO clip
+    surr1 = ratio * advantage
+    surr2 = torch.clamp(ratio, 1 - clip_eps, 1 + clip_eps) * advantage
+    policy_loss = -torch.min(surr1, surr2).mean()
+
+    # Step 4: KL 惩罚 (近似: log π - log π_ref)
+    kl = (log_probs - ref_log_probs).mean()
+
+    total_loss = policy_loss + beta * kl
+    return total_loss, policy_loss, kl, advantage
+
+
+# 模拟：一个 prompt 采样 G=8 个回答
+G = 8
+torch.manual_seed(42)
+rewards = torch.tensor([0.2, 0.8, 0.5, 0.1, 0.9, 0.3, 0.7, 0.6])
+
+# 模拟各模型的 log prob
+old_log_probs = torch.randn(G) * 0.5 - 2.0   # 采样时的策略
+log_probs = old_log_probs + torch.randn(G) * 0.1  # 更新后的策略（略有变化）
+ref_log_probs = torch.randn(G) * 0.5 - 2.0   # 参考模型
+
+loss, p_loss, kl, adv = grpo_loss(log_probs, old_log_probs, ref_log_probs, rewards)
+
+print(f"  G={G} 个回答的 rewards: {rewards.tolist()}")
+print(f"  组内标准化后 advantage: {[f'{a:.2f}' for a in adv.tolist()]}")
+print(f"  Policy loss: {p_loss.item():.4f}")
+print(f"  KL penalty:  {kl.item():.4f}")
+print(f"  Total loss:  {loss.item():.4f}")
+
+print("""
+观察 advantage：
+  - reward 高于组均值的回答 → advantage > 0 → 增加其概率
+  - reward 低于组均值的回答 → advantage < 0 → 降低其概率
+  - 不需要训练 Value Network，直接从组内比较得到信号
+""")
+
+print("--- GRPO 的 Reward 来源 ---")
+print("""
+GRPO 的 reward 可以来自多种来源（这是它的灵活之处）：
+
+  1. 规则验证器（DeepSeek-R1 的主要方式）
+     - 数学题：答案是否正确
+     - 代码题：能否通过测试用例
+     - 格式要求：是否按指定格式输出
+     → 不需要训练 RM，reward 信号精确可靠
+
+  2. Reward Model
+     - 通用对话质量评分
+     - 和 PPO 类似，但省掉了 Value Network
+
+  3. 混合 reward
+     - 规则分 + RM分 的加权组合
+     - 例如: r = 0.7 * correctness + 0.3 * style_score
+
+ms-swift 中使用 GRPO 训练：
+  swift rlhf \\
+    --rlhf_type grpo \\
+    --model /path/to/sft_model \\
+    --reward_funcs accuracy format \\
+    --num_generations 8 \\
+    --learning_rate 1e-6
+
+【面试考点】
+Q: GRPO 和 PPO 的核心区别？
+A: PPO 用 Value Network 估计 baseline，GRPO 用同一 prompt 下
+   多个采样回答的 reward 均值作 baseline，省掉了 Value Network。
+
+Q: GRPO 和 DPO 的核心区别？
+A: DPO 是离线方法，只用预先标注好的偏好对；
+   GRPO 是在线方法，每步都让当前策略生成新回答并评分。
+   在线探索让 GRPO 能发现更好的行为。
+
+Q: 为什么 DeepSeek-R1 用 GRPO 而不是 PPO？
+A: 数学/代码任务有确定性的验证器（答案对不对一目了然），
+   不需要训练 RM；同时省掉 Value Network 降低了 50% 的
+   额外模型开销，工程上更简单。
+""")
+
+# ============================================================
+# 10. SFT、RLHF、DPO、GRPO 怎么选？
+# ============================================================
+print("\n" + "=" * 60)
+print("【10. SFT、RLHF、DPO、GRPO 对比】")
 print("=" * 60)
 print("""
 ┌─────────┬─────────────────────────────────┬──────────────────┐
@@ -360,32 +505,38 @@ print("""
 │ DPO     │ 有 chosen/rejected 偏好对       │ ★★☆ 中          │
 │         │ 想要简单有效的对齐               │ 需 2 个模型       │
 ├─────────┼─────────────────────────────────┼──────────────────┤
+│ GRPO    │ 有可验证的 reward 信号          │ ★★☆ 中          │
+│         │ 想要在线探索，不想训练 RM/V     │ 需 2 个模型       │
+├─────────┼─────────────────────────────────┼──────────────────┤
 │ SimPO   │ 不想维护 reference model        │ ★☆☆ 低          │
 │ ORPO    │ 想合并 SFT + 偏好对齐           │ ★☆☆ 低          │
 └─────────┴─────────────────────────────────┴──────────────────┘
 """)
 
 # ============================================================
-# 10. 总结
+# 11. 总结
 # ============================================================
 print("\n" + "=" * 60)
-print("【10. 本课总结与面试要点】")
+print("【11. 本课总结与面试要点】")
 print("=" * 60)
 print("""
 ✅ 核心概念：
   1. 对齐训练让模型从"能说话"变成"说人话"
   2. RLHF 三步：训练 RM → PPO 优化策略 → 迭代
   3. DPO 把 RM + PPO 合成一步，直接优化偏好
-  4. DPO loss 本质是让 chosen 的相对概率比 rejected 更高
-  5. β 控制偏好强度，reference model 防止模型退化
+  4. GRPO 用组内相对排名替代 Value Network，在线 RL 但更轻量
+  5. DPO 是离线方法（用预标注数据），GRPO 是在线方法（即时采样+评分）
+  6. β 控制偏好强度 / KL 惩罚强度，reference model 防止模型退化
 
 ✅ 面试高频题：
   1. DPO 和 RLHF 的区别？（不需要 RM 和 PPO，一个 loss 搞定）
   2. 为什么需要 reference model？（KL 约束，防止退化）
   3. β 太大/太小会怎样？（太大过拟合偏好，太小学不到偏好）
   4. DPO 的 log π(y|x) 怎么算？（token-level log prob 求和）
-  5. SFT 数据和偏好数据有什么区别？（一个是标准答案，一个是比较）
-  6. RLHF 需要几个模型？（4个：策略、参考、RM、价值网络）
+  5. GRPO 和 PPO 的区别？（组内 reward 均值替代 Value Network 做 baseline）
+  6. GRPO 和 DPO 的区别？（在线 vs 离线，GRPO 有探索能力）
+  7. DeepSeek-R1 为什么用 GRPO？（数学/代码有验证器，不需要 RM）
+  8. RLHF 需要几个模型？（4个）PPO vs GRPO？（4个 vs 2个）
 
 下一课：07_inference_optimization.py - 推理优化与服务化
 """)
