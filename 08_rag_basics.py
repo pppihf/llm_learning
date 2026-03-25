@@ -433,5 +433,7 @@ print("""
 
 恭喜完成全部 8 课！🎓
   第1阶段（基础）: 01 Tokenizer → 02 Attention → 03 推理 → 04 LoRA
-  第2阶段（进阶）: 05 分布式 → 06 DPO → 07 推理优化 → 08 RAG
+  第2阶段（进阶）: 05 分布式 → 06 DPO/GRPO → 07 推理优化 → 08 RAG
+
+下一课：09_agent_basics.py - LLM Agent 基础
 """)

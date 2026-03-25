@@ -26,6 +26,7 @@
 | 06 | 对齐训练与 DPO | `06_alignment_and_dpo.py` | SFT / RLHF / DPO 关系，偏好数据格式，DPO loss 直觉 |
 | 07 | 推理优化与服务化 | `07_inference_optimization.py` | TTFT/TPS、连续批处理、Prefix Cache、Paged Attention |
 | 08 | RAG 系统基础 | `08_rag_basics.py` | 切块、检索、Prompt 组装、RAG 常见坑 |
+| 09 | LLM Agent 基础 | `09_agent_basics.py` | ReAct、Function Calling、Multi-Agent、MCP |
 
 
 ## 面试高频考点速查
@@ -39,3 +40,6 @@
 - DPO 为什么不需要 PPO？
 - 在线推理为什么要 continuous batching？
 - RAG 的 chunk size 应该怎么选？
+- Agent 和 RAG 的关系？
+- ReAct 范式的流程是什么？
+- Multi-Agent 有哪些常见架构？
