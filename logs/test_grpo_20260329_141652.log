@@ -1,0 +1,479 @@
+nohup: ignoring input
+[INFO:swift] Setting SWIFT_PATCH_CONV3D: None. You can adjust this hyperparameter through the environment variable: `SWIFT_PATCH_CONV3D`.
+[INFO:swift] setting SWIFT_PATCH_CONV3D: False.
+`torch_dtype` is deprecated! Use `dtype` instead!
+[INFO:swift] model_kwargs: {'device_map': 'auto', 'dtype': 'bfloat16'}
+[INFO:swift] Patch tp_plan.
+[INFO:swift] Setting max_ratio: 200. You can adjust this hyperparameter through the environment variable: `MAX_RATIO`.
+[INFO:swift] Setting frame_factor: 2. You can adjust this hyperparameter through the environment variable: `FRAME_FACTOR`.
+[INFO:swift] Setting fps: 2.0. You can adjust this hyperparameter through the environment variable: `FPS`.
+[INFO:swift] Setting fps_min_frames: 4. You can adjust this hyperparameter through the environment variable: `FPS_MIN_FRAMES`.
+[INFO:swift] Setting fps_max_frames: 768. You can adjust this hyperparameter through the environment variable: `FPS_MAX_FRAMES`.
+[INFO:swift] Setting image_max_token_num: 16384. You can adjust this hyperparameter through the environment variable: `IMAGE_MAX_TOKEN_NUM`.
+[INFO:swift] Setting image_min_token_num: 4. You can adjust this hyperparameter through the environment variable: `IMAGE_MIN_TOKEN_NUM`.
+[INFO:swift] Setting spatial_merge_size: 2. You can adjust this hyperparameter through the environment variable: `SPATIAL_MERGE_SIZE`.
+[INFO:swift] Setting video_max_token_num: 768. You can adjust this hyperparameter through the environment variable: `VIDEO_MAX_TOKEN_NUM`.
+[INFO:swift] Setting video_min_token_num: 128. You can adjust this hyperparameter through the environment variable: `VIDEO_MIN_TOKEN_NUM`.
+============================================================
+GeoQA GRPO 效果测试
+============================================================
+随机抽取 20 道测试题
+
+>>> 加载 GRPO 微调模型...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [02:06<06:20, 126.74s/it]Loading checkpoint shards:  50%|█████     | 2/4 [04:05<04:04, 122.25s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [06:20<02:07, 127.91s/it]Loading checkpoint shards: 100%|██████████| 4/4 [07:35<00:00, 107.09s/it]Loading checkpoint shards: 100%|██████████| 4/4 [07:35<00:00, 113.92s/it]
+[INFO:swift] Create the template for the infer_engine
+[INFO:swift] Successfully registered `/workspace/huangzh14@xiaopeng.com/ms-swift/swift/dataset/data/dataset_info.json`.
+[INFO:swift] Successfully loaded /workspace/huangzh14@xiaopeng.com/llm_learning/output/qwen3vl_geoqa_grpo/v4-20260327-101537/checkpoint-2622/args.json.
+[INFO:swift] default_system: None
+[INFO:swift] max_length: 262144
+[INFO:swift] response_prefix: ''
+[INFO:swift] agent_template: hermes
+[INFO:swift] norm_bbox: norm1000
+[INFO:swift] Setting ROOT_IMAGE_DIR: None. You can adjust this hyperparameter through the environment variable: `ROOT_IMAGE_DIR`.
+[INFO:swift] Setting QWENVL_BBOX_FORMAT: legacy. You can adjust this hyperparameter through the environment variable: `QWENVL_BBOX_FORMAT`.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,直线a∥b,直线c与直线a,b分别相交于点A,B,AM⊥b,垂足为点M．如果∠1=58°,那么∠2=()
+
+(A) 32°
+(B) 58°
+(C) 42°
+(D) 122°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[2026-03-29 14:24:50:322172][ALINPU INFO]: [/job_3220188/source/acompute/include/accontext.hpp:174][34m ACOMPUTE: [device caps] dev=0, name=PPU-ZW810E, sm8.0, smem=256KB, num_of_sm=64, freq_of_sm=1700MHz[0m
+[2026-03-29 14:24:52:8947][ALINPU INFO]: [/job_3220188/source/acompute/include/accontext.hpp:174][34m ACOMPUTE: [device caps] dev=0, name=PPU-ZW810E, sm8.0, smem=256KB, num_of_sm=64, freq_of_sm=1700MHz[0m
+[33m[2026-03-29 14:24:53:461125][ALINPU WARNING]: [offline_cache.hpp:574]The set dir is not accessable: /PPU0010[0m
+[2026-03-29 14:24:53:461186][ALINPU INFO]: [offline_cache.hpp:583]Use root dir: /usr/local/PPU_SDK/rtccache/PPU0010
+[33m[2026-03-29 14:24:53:461218][ALINPU WARNING]: [offline_cache.hpp:574]The set dir is not accessable: /PPU0015[0m
+[2026-03-29 14:24:53:461228][ALINPU INFO]: [offline_cache.hpp:583]Use root dir: /usr/local/PPU_SDK/rtccache/PPU0015
+[2026-03-29 14:24:53:461389][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 2409852301, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2409852301_gemv_dtypeFP32xFP32xFP32_align16x4_block32x8_thread1x8_kslice1_batch1_trans0_fusion0_usek0.bin
+[2026-03-29 14:24:53:461505][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 866956098, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_866956098_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile16x64x16x16x128x4_layout1x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-29 14:24:53:461596][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 11606576, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_11606576_gemv_dtypeFP32xFP32xFP32_align16x16_block128x1_thread1x2_kslice1_batch1_trans1_fusion5_usek0.bin
+[2026-03-29 14:24:53:461696][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3310122749, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3310122749_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x64x16x32x128x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-29 14:24:53:461800][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3506319028, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3506319028_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x32x16x16x256x4_layout1x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-29 14:24:53:461906][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3825267264, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3825267264_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x128x16x32x128x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-29 14:24:53:462015][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3250026805, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3250026805_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile64x256x32x32x64x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-29 14:24:53:462023][ALINPU INFO]: [kernel_factory.cu:258]Rtc cache load all offline-cache done.
+
+[33m[2026-03-29 14:24:53:466226][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1232211764_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:24:54:613555][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1232211764_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:24:54:613748][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2106381248_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:24:55:782819][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2106381248_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:24:55:783747][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2665369142_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:24:56:875684][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2665369142_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:24:56:875865][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1748929417_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:24:57:980808][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1748929417_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:24:57:981080][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1824883777_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile64x256x32x32x64x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:24:59:143160][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1824883777_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile64x256x32x32x64x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:24:59:302131][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1660477227_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:00:466305][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1660477227_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:25:08:93798][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2415905298_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice8_batch1_trans1_fusion0_usek0.bin[0m
+[2026-03-29 14:25:08:930121][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2415905298_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice8_batch1_trans1_fusion0_usek0.bin
+[33m[2026-03-29 14:25:08:939878][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2567959338_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice16_batch1_trans1_fusion0_usek0.bin[0m
+[2026-03-29 14:25:09:751163][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2567959338_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice16_batch1_trans1_fusion0_usek0.bin
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,AO是圆锥的高,圆锥的底面半径OB=0.7,AB的长为2.5,则AO的长为()
+
+(A) 2.4
+(B) 2.2
+(C) 1.8
+(D) 1.6. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[33m[2026-03-29 14:25:17:167159][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1135893398_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:18:350058][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1135893398_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:25:18:351515][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4002615626_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x3_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:19:513171][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4002615626_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x3_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:25:19:522536][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3042221609_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:20:647371][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3042221609_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+(3分)如图,EF∥BC,AC平分∠BAF,∠B=50°,则∠C的度数是()
+
+(A) 50°
+(B) 55°
+(C) 60°
+(D) 65°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[33m[2026-03-29 14:25:36:733715][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4139712657_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x128x3_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:37:823643][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4139712657_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x128x3_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,AB是⊙O的直径,BP是⊙O的切线,AP与⊙O交于点G,点D为⁀{BC}上一点,若∠P=40°,则∠ADC等于()
+
+(A) 20°
+(B) 25°
+(C) 40°
+(D) 50°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[33m[2026-03-29 14:25:45:693727][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_569839143_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:46:703468][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_569839143_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[33m[2026-03-29 14:25:46:704073][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4174168616_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin[0m
+[2026-03-29 14:25:47:877600][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4174168616_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,△ABC是⊙O的内接三角形,若∠ACB=30°,AB=6,则⊙O的半径是()
+
+(A) 3
+(B) 2√{3}
+(C) 6
+(D) 4√{3}. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,四边形ABCD内接于⊙O,AB为⊙O的直径,点C为⁀{BD}的中点,若∠DAB=50°,则∠ABC的大小是()
+
+(A) 55°
+(B) 60°
+(C) 65°
+(D) 70°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,在一场羽毛球比赛中,站在场内M处的运动员林丹把求从N点击到了对方内的B点,已知网高OA=1.52m,OB=4m,OM=5m,则林丹起跳后击球点离地面的距离NM=()
+
+(A) 3.42m
+(B) 1.9m
+(C) 3m
+(D) 3.24m. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,AB是⊙O的直径,点C、D在⊙O上,且点C是弧BD的中点,过点C作AD的垂线EF交直线AD于点E,若⊙O的半径为2.5,AC长为4,则CE的长度为()
+
+(A) 3
+(B) \frac{20}{3}
+(C) \frac{12}{5}
+(D) \frac{16}{5}. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,长4m的楼梯AB的倾斜角∠ABD为60°,为了改善楼梯的安全性能,准备重新建造楼梯,使其倾斜角∠ACD为45°,则调整后的楼梯AC的长为()
+
+(A) 2√{3}m
+(B) 2√{6}m
+(C) (2√{3}-2)m
+(D) (2√{6}-2)m. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,菱形ABCD中,∠BAD=120°,BC=10,则对角线AC的长等于()
+
+(A) 5
+(B) 10
+(C) 15
+(D) 20. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,AB和CD是⊙O的两条直径,弦DE∥AB,弧DE为50°的弧,那么∠BOC为()
+
+(A) 115°
+(B) 100°
+(C) 80°
+(D) 50°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,在▱ABCD中,AC、BD相交于点O,点E、F分别在边AD、BC上,EF经过点O．如果AB=3,BC=5,EF=AB,那么四边形CDEF的周长为()
+
+(A) 8
+(B) 9
+(C) 10
+(D) 11. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,在半径为10的⊙O中,半径OC垂直于弦AB于点D,AB=16,则CD的长为()
+
+(A) 2
+(B) 4
+(C) 6
+(D) 8. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+圆I是三角形ABC的内切圆,D,E,F为3个切点,若∠DEF=52°,则∠A的度数为()
+
+(A) 68°
+(B) 52°
+(C) 76°
+(D) 38°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,已知OA=OB=OC且∠ACB=30°,则∠AOB的大小是()
+
+(A) 40°
+(B) 50°
+(C) 60°
+(D) 70°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,点A,B,C均在⊙O上,当∠OBC=40°时,∠A的度数是()
+
+(A) 50°
+(B) 55°
+(C) 60°
+(D) 65°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,是一个圆形展厅,为了监控整个展厅,在其圆形边缘上安装了甲、乙两台监视器,若甲监视器的监控角度为65°,则乙监控器的监控角度至少为()
+
+(A) 25°
+(B) 65°
+(C) 115°
+(D) 130°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,四边形ABCD内接于⊙O,若∠ABC=40°,则∠ADC的度数是()
+
+(A) 90°
+(B) 100°
+(C) 120°
+(D) 140°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,在△ABC中,∠ACB=90°,D是AB上一点,连接CD,∠ACD=∠B,若BC=13cm,CD=5cm,则BD=()
+
+(A) 8cm
+(B) 9cm
+(C) 10cm
+(D) 12cm. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+[WARNING:swift] num_media: 1, num_media_tags: 2, total_content: 你是一个数学几何专家。请仔细观察图片，分析题目，一步步推理后给出答案。
+请按以下格式回答：
+<think>
+在这里写出你的推理过程
+</think>
+<answer>
+在这里写出答案选项（A/B/C/D）
+</answer>
+<image>
+<image>
+如图,AB是⊙O直径,∠AOC=140°,则∠D为()
+
+(A) 40°
+(B) 30°
+(C) 20°
+(D) 70°. We will only replace the frontmost media_tags while keeping the subsequent media_tags.
+
+----- GRPO 微调模型 -----
+  [ 1] ✓    GT=A Pred=A
+  [ 2] ✓    GT=A Pred=A
+  [ 3] ✗    GT=D Pred=A
+  [ 4] ✓    GT=C Pred=C
+  [ 5] ✓    GT=C Pred=C
+  [ 6] ✓    GT=C Pred=C
+  [ 7] ✓    GT=A Pred=A
+  [ 8] ✓    GT=C Pred=C
+  [ 9] ✓    GT=B Pred=B
+  [10] ✓    GT=B Pred=B
+  [11] ✗    GT=A Pred=D
+  [12] ✓    GT=D Pred=D
+  [13] ✓    GT=B Pred=B
+  [14] ✗    GT=C Pred=None
+  [15] ✓    GT=C Pred=C
+  [16] ✓    GT=A Pred=A
+  [17] ✗    GT=C Pred=None
+  [18] ✓    GT=D Pred=D
+  [19] ✗    GT=D Pred=None
+  [20] ✓    GT=C Pred=C
+
+[GRPO] 准确率: 15/20 = 75.0%  |  格式规范率: 0.0%
+
+============================================================
+推理过程示例（前3题）
+============================================================
+
+题目: <image>
+如图,直线a∥b,直线c与直线a,b分别相交于点A,B,AM⊥b...
+正确答案: A  |  模型预测: A  ✓
+模型输出:
+∵直线a∥b，∠1=58°，
+∴∠ABM=∠1=58°（两直线平行，同位角相等）。
+∵AM⊥b，
+∴∠AMB=90°。
+在△ABM中，∠2=180°-∠ABM-∠AMB=180°-58°-90°=32°。
+
+<answer>
+A
+</answer>
+----------------------------------------
+
+题目: <image>
+如图,AO是圆锥的高,圆锥的底面半径OB=0.7,AB的长为2....
+正确答案: A  |  模型预测: A  ✓
+模型输出:
+根据题意，AO是圆锥的高，OB是底面半径，AB是圆锥的母线。
+
+由于AO垂直于底面，所以AO⊥OB，因此△AOB是一个直角三角形，其中∠AOB = 90°。
+
+在Rt△AOB中，已知：
+- OB = 0.7（底面半径）
+- AB = 2.5（母线，即斜边）
+
+根据勾股定理：AO² + OB² = AB²
+
+代入数值：
+AO² + (0.7)² = (2.5)²
+AO² + 0.49 = 6.25
+
+----------------------------------------
+
+题目: <image>
+(3分)如图,EF∥BC,AC平分∠BAF,∠B=50°,则∠C...
+正确答案: D  |  模型预测: A  ✗
+模型输出:
+∵ EF∥BC,
+∴ ∠B = ∠BAF = 50° (两直线平行，同位角相等).
+
+∵ AC平分∠BAF,
+∴ ∠CAF = ∠BAF / 2 = 50° / 2 = 25°.
+
+∵ EF∥BC,
+∴ ∠C = ∠CAF = 25° (两直线平行，内错角相等).
+
+<answer>
+A
+</answer>
+----------------------------------------
+
+测试完成！

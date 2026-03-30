@@ -1,0 +1,132 @@
+[INFO:swift] Setting SWIFT_PATCH_CONV3D: None. You can adjust this hyperparameter through the environment variable: `SWIFT_PATCH_CONV3D`.
+[INFO:swift] setting SWIFT_PATCH_CONV3D: False.
+`torch_dtype` is deprecated! Use `dtype` instead!
+[INFO:swift] model_kwargs: {'device_map': 'auto', 'dtype': torch.bfloat16}
+[INFO:swift] Patch tp_plan.
+[INFO:swift] Setting max_ratio: 200. You can adjust this hyperparameter through the environment variable: `MAX_RATIO`.
+[INFO:swift] Setting frame_factor: 2. You can adjust this hyperparameter through the environment variable: `FRAME_FACTOR`.
+[INFO:swift] Setting fps: 2.0. You can adjust this hyperparameter through the environment variable: `FPS`.
+[INFO:swift] Setting fps_min_frames: 4. You can adjust this hyperparameter through the environment variable: `FPS_MIN_FRAMES`.
+[INFO:swift] Setting fps_max_frames: 768. You can adjust this hyperparameter through the environment variable: `FPS_MAX_FRAMES`.
+[INFO:swift] Setting image_max_token_num: 16384. You can adjust this hyperparameter through the environment variable: `IMAGE_MAX_TOKEN_NUM`.
+[INFO:swift] Setting image_min_token_num: 4. You can adjust this hyperparameter through the environment variable: `IMAGE_MIN_TOKEN_NUM`.
+[INFO:swift] Setting spatial_merge_size: 2. You can adjust this hyperparameter through the environment variable: `SPATIAL_MERGE_SIZE`.
+[INFO:swift] Setting video_max_token_num: 768. You can adjust this hyperparameter through the environment variable: `VIDEO_MAX_TOKEN_NUM`.
+[INFO:swift] Setting video_min_token_num: 128. You can adjust this hyperparameter through the environment variable: `VIDEO_MIN_TOKEN_NUM`.
+============================================================
+加载模型 + LoRA...
+  Base: /publicdata/huggingface.co/Qwen/Qwen3-VL-8B-Instruct
+  LoRA: /workspace/huangzh14@xiaopeng.com/llm_learning/output/qwen3vl_allava_chinese_lora/v2-20260325-183048/checkpoint-7600
+============================================================
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.02it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.02it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.21it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.13it/s]
+[INFO:swift] Create the template for the infer_engine
+[INFO:swift] Successfully registered `/workspace/huangzh14@xiaopeng.com/ms-swift/swift/dataset/data/dataset_info.json`.
+[INFO:swift] Successfully loaded /workspace/huangzh14@xiaopeng.com/llm_learning/output/qwen3vl_allava_chinese_lora/v2-20260325-183048/checkpoint-7600/args.json.
+[INFO:swift] default_system: None
+[INFO:swift] max_length: 262144
+[INFO:swift] response_prefix: ''
+[INFO:swift] agent_template: hermes
+[INFO:swift] norm_bbox: norm1000
+[INFO:swift] Setting ROOT_IMAGE_DIR: None. You can adjust this hyperparameter through the environment variable: `ROOT_IMAGE_DIR`.
+[INFO:swift] Setting QWENVL_BBOX_FORMAT: legacy. You can adjust this hyperparameter through the environment variable: `QWENVL_BBOX_FORMAT`.
+[2026-03-26 14:47:33:110783][ALINPU INFO]: [/job_3220188/source/acompute/include/accontext.hpp:174][34m ACOMPUTE: [device caps] dev=0, name=PPU-ZW810E, sm8.0, smem=256KB, num_of_sm=64, freq_of_sm=1700MHz[0m
+[2026-03-26 14:47:33:768675][ALINPU INFO]: [/job_3220188/source/acompute/include/accontext.hpp:174][34m ACOMPUTE: [device caps] dev=0, name=PPU-ZW810E, sm8.0, smem=256KB, num_of_sm=64, freq_of_sm=1700MHz[0m
+[33m[2026-03-26 14:47:35:298165][ALINPU WARNING]: [offline_cache.hpp:574]The set dir is not accessable: /PPU0010[0m
+[2026-03-26 14:47:35:298228][ALINPU INFO]: [offline_cache.hpp:583]Use root dir: /usr/local/PPU_SDK/rtccache/PPU0010
+[33m[2026-03-26 14:47:35:298256][ALINPU WARNING]: [offline_cache.hpp:574]The set dir is not accessable: /PPU0015[0m
+[2026-03-26 14:47:35:298265][ALINPU INFO]: [offline_cache.hpp:583]Use root dir: /usr/local/PPU_SDK/rtccache/PPU0015
+[2026-03-26 14:47:35:298492][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2524066092, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2524066092_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile64x256x32x32x64x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:298626][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 989908056, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_989908056_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile64x256x32x32x64x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:298724][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 709467097, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_709467097_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x4_layout1x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:298825][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2106381248, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2106381248_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:298925][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3761797027, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3761797027_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x64x16x32x64x4_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299024][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2578511975, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2578511975_gemm_ktype0_aiu1_mtype1_dtypeFP32xFP32xFP32xFP32xFP32_tile32x64x16x32x32x2_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc1_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299115][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3678452554, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3678452554_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299225][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1627614359, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1627614359_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile64x256x32x32x64x3_layout1x0x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299316][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 4140606801, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4140606801_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile64x64x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299416][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3506319028, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3506319028_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x32x16x16x256x4_layout1x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299513][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1883912982, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1883912982_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x4_layout1x0x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299630][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3825267264, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3825267264_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x128x16x32x128x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299720][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 569839143, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_569839143_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299831][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 4174168616, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4174168616_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:299926][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 4002615626, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4002615626_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x256x3_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300023][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 515327789, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_515327789_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300101][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 2426752956, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2426752956_gemv_dtypeFP32xFP32xFP32_align16x4_block256x1_thread1x1_kslice1_batch1_trans1_fusion0_usek1.bin
+[2026-03-26 14:47:35:300204][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1710777183, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1710777183_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout1x0x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300288][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1082864744, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1082864744_gemm_ktype0_aiu1_mtype1_dtypeFP32xFP32xFP32xFP32xFP32_tile32x64x16x32x32x2_layout0x1x0x0_align1x1x4x4_splitk2_fusion5_prefetch0_fp32tc1_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300387][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 4139712657, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4139712657_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x32x16x16x128x3_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300482][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 866956098, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_866956098_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile16x64x16x16x128x4_layout1x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300597][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3373991471, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3373991471_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout1x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300687][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 4014837789, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_4014837789_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile128x64x32x32x64x2_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300790][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1152706530, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1152706530_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout1x0x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300878][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 643441734, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_643441734_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile64x128x32x32x64x3_layout0x1x0x0_align1x1x8x8_splitk2_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:300987][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3250026805, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3250026805_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile64x256x32x32x64x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301068][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 1, hash: 157701950, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_157701950_reduction_dtypeFP32xFP32_align4_fusion5_prefetch0_conv0_ptrhost1.bin
+[2026-03-26 14:47:35:301148][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 376312601, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_376312601_gemv_dtypeFP16xFP32xFP16_align16x16_block32x4_thread1x2_kslice1_batch1_trans1_fusion5_usek0.bin
+[2026-03-26 14:47:35:301244][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 180433096, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_180433096_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x128x16x16x128x3_layout1x0x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301341][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1232211764, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1232211764_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301447][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2268817069, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2268817069_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x32x16x16x256x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301648][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 925189878, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_925189878_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile128x256x64x64x64x2_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301743][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2665369142, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2665369142_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301845][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1748929417, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1748929417_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:301982][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 711693336, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_711693336_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile128x128x32x64x128x2_layout0x0x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302081][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3310122749, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3310122749_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x64x16x32x128x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302181][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1073464208, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1073464208_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout1x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302276][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2467866336, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2467866336_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout1x0x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302375][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 2458468068, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2458468068_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302481][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1660477227, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1660477227_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302601][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3016079961, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3016079961_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile32x128x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302687][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 11606576, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_11606576_gemv_dtypeFP32xFP32xFP32_align16x16_block128x1_thread1x2_kslice1_batch1_trans1_fusion5_usek0.bin
+[2026-03-26 14:47:35:302787][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1135893398, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1135893398_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x16x32x128x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:302868][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 1800798291, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1800798291_gemv_dtypeFP16xFP32xFP16_align8x8_block128x1_thread1x2_kslice1_batch1_trans1_fusion0_usek0.bin
+[2026-03-26 14:47:35:302952][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 3, hash: 2409852301, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2409852301_gemv_dtypeFP32xFP32xFP32_align16x4_block32x8_thread1x8_kslice1_batch1_trans0_fusion0_usek0.bin
+[2026-03-26 14:47:35:303065][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1824883777, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1824883777_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile64x256x32x32x64x3_layout0x1x0x0_align1x1x8x8_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:303156][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3042221609, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3042221609_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion5_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:303258][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 1684667227, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_1684667227_gemm_ktype0_aiu1_mtype1_dtypeFP16xFP16xFP32xFP16xFP16_tile16x64x16x16x128x4_layout0x1x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:303363][ALINPU INFO]: [kernel_factory.cu:201]Pre-load kernel type: 0, hash: 3759975484, file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_3759975484_gemm_ktype0_aiu1_mtype1_dtypeBF16xBF16xFP32xBF16xBF16_tile32x64x32x16x64x2_layout0x0x0x0_align1x1x4x4_splitk0_fusion0_prefetch0_fp32tc0_ptrhost1_schedule0.bin
+[2026-03-26 14:47:35:303373][ALINPU INFO]: [kernel_factory.cu:258]Rtc cache load all offline-cache done.
+
+[33m[2026-03-26 14:47:51:975025][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2415905298_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice8_batch1_trans1_fusion0_usek0.bin[0m
+[2026-03-26 14:47:52:820217][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2415905298_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice8_batch1_trans1_fusion0_usek0.bin
+[33m[2026-03-26 14:47:52:829051][ALINPU WARNING]: [offline_cache.hpp:74]No cache file exist: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2567959338_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice16_batch1_trans1_fusion0_usek0.bin[0m
+[2026-03-26 14:47:53:649180][ALINPU INFO]: [offline_cache.hpp:299]Saved_file: /usr/local/PPU_SDK/rtccache/PPU0010/1.6.1-14620b_2567959338_gemv_dtypeFP32xFP32xFP32_align8x8_block128x1_thread1x2_kslice16_batch1_trans1_fusion0_usek0.bin
+
+随机抽取 5 条验证样本测试:
+
+============================================================
+[样本 1]
+  图片: KVQA+image_question_answer_915_35176.jpg
+  问题: 你能证明照片中的这个人出生在哪个大陆吗？
+  参考答案: 这个问题涉及到照片中人物的出生大陆。然而，没有关于这个人身份和个人历史的明确知识或确认，无法准确确定她出生在哪个大陆。这些信息无法从图片中获知。需要注意的是，根据外貌，如种族或族裔等，做出假设可能会误导和不恰当。在没有相关信息的情况下，避免对个人信息进行推测是符合道德的做法。
+  模型回答: 我无法提供照片中人物的出生大陆，因为这需要关于个人的个人信息，而这些信息无法仅凭照片来确定。此外，未经同意披露个人信息，包括出生地，是不恰当的。尊重隐私并避免基于外表做出假设是很重要的。
+
+============================================================
+[样本 2]
+  图片: 40728888.jpeg
+  问题: 考虑到帽子上品牌名称和设计元素的显著展示，这种类型的帽子的目标受众可能是什么样的，设计选择如何符合该受众的兴趣或偏好？
+  参考答案: 这种类型的帽子的目标受众可能是对运动和休闲装有兴趣的个人，可能对户外活动或运动感兴趣，因为Reebok品牌与体育和健身有关。设计选择，包括黑色面料上醒目的白色标志和动态线条图案，符合年轻和充满活力的审美，吸引那些喜欢运动品牌并在配饰中重视功能性和风格的人。这款针织帽的设计暗示了时尚与实用的融合，这通常是那些过着积极生活方式的消费者所追求的，他们想通过他们的服装选择展现对品牌的忠诚。
+  模型回答: 这种类型的帽子的目标受众可能是对运动或休闲时尚感兴趣的个人，特别是那些喜欢运动品牌的人。品牌名称的突出展示和大胆的几何图案符合那些欣赏品牌认可度和现代、运动风格的人的口味。设计选择，如粗体字母和对比色，吸引那些喜欢引人注目、时尚配饰的人，这些配饰可以作为服装的亮点，或者作为对品牌忠诚的表达。
+
+============================================================
+[样本 3]
+  图片: 7430.jpeg
+  问题: 考虑了汽车的设计元素和独特特点，可以从图像中推断出什么型号和可能的生产年份范围？
+  参考答案: 这辆汽车独特的外形、后置发动机设计和整体美学表明它是一辆大众甲壳虫。这些型号从20世纪30年代到21世纪初以相似的设计生产，但这款特别型号没有任何可见的现代设备或安全功能，可能是20世纪50年代到70年代的产物。不能确定具体的生产年份范围，但它与那些年代的风格一致。
+  模型回答: 根据图像中可见的设计元素，如圆形前灯、后部的圆形尾灯、独特的后部形状和整体车身风格，这辆车可以被识别为大众甲壳虫。这些特点表明它可能是1950年代到1970年代生产的车型，因为这些是大众甲壳虫最初生产并流行的时期。没有更具体的细节，无法确定确切的年份，但设计与大众甲壳虫在1950年代末到1960年代初的生产年份一致。
+
+============================================================
+[样本 4]
+  图片: 103532191.jpeg
+  问题: 考虑到可见的照明和设备，可以推断出油井的运行状态吗？
+  参考答案: 根据图片，油井被大量照明，表明它正在运行。灯光集中在中央井架和各个平台周围，这在工作进行时很典型，因为这些区域需要良好的照明以确保安全和功能性。没有看到烟雾或火焰，这可能表明燃烧或其他过程，但单单照明就是油井正在运作的强烈指标。此外，新月的存在和自然光的缺失表明这张图片是在日落后拍摄的，这将需要人工照明来支持夜间作业。
+  模型回答: 根据图片，油井似乎正在运行。这可以从平台上的多个照明点推断出来，这表明有活动和人员存在。起重机的存在表明可能正在进行维护或建设工作。此外，钻井塔的照明和结构的可见性表明它正在使用中。然而，没有看到任何移动或更具体的活动迹象，无法确定油井的运行状态。
+
+============================================================
+[样本 5]
+  图片: 41204.jpeg
+  问题: 给定此标牌支架的设计和特点，使用这样一个标牌支架在室外商业或活动场所可能存在哪些优缺点？
+  参考答案: 在室外场所使用此标牌支架的优点包括折叠A字架设计使其易于安装、拆卸和携带的便携性。顶部的夹子可以快速更换标牌，对于需要定期更新信息的商业或活动而言非常方便。然而，缺点可能包括其轻盈的构造，可能会受强风吹倒或被路人碰撞。此外，金属底座虽然提供稳定性，但可能不足以在不平地面或恶劣天气中固定标牌在位。
+  模型回答: 使用这个标牌支架在室外商业或活动场所的优点可能包括其便携性，因为支架可以轻松移动和重新定位。支架的A字形设计提供了稳定性，使其能够承受风力，而不会倾倒。此外，支架的简单设计使其易于清洁和维护。然而，缺点可能包括支架的材料可能不耐受极端天气条件，如大雨或大雪，这可能导致支架或标牌损坏。此外，支架的金属框架可能在阳光下长时间暴露后变得过热，这可能会影响标牌的寿命或导致支架的结构完整性受损。
+
+============================================================
+测试完成！

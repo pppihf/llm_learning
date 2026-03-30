@@ -3,8 +3,9 @@
 > 面向大模型/NLP 算法工程师面试准备，基于 fuyao 平台实战演练
 
 ## 环境信息
-- **平台**: (PPU × 8, 每张 95.6GB)
-- **可用 GPU**: GPU 0-7 (8张空闲)
+- **平台**: (PPU × 16, 每张 95.6GB)
+- **Job**: `bifrost-2026032318040000-huangzh14`
+- **可用 GPU**: GPU 0-7 (8张空闲, 8-15 被 gpu_run.py 占用)
 - **PyTorch**: 2.7.0 | **Transformers**: 4.57.6 | **PEFT**: 0.16.0
 
 ## 学习大纲
@@ -28,6 +29,15 @@
 | 08 | RAG 系统基础 | `08_rag_basics.py` | 切块、检索、Prompt 组装、RAG 常见坑 |
 | 09 | LLM Agent 基础 | `09_agent_basics.py` | ReAct、Function Calling、Multi-Agent、MCP |
 
+### 第三阶段：多模态实战
+
+| 编号 | 主题 | 文件 | 核心内容 |
+|------|------|------|----------|
+| 10 | 多模态大模型 (VLM) 实战 | `10_vlm_multimodal.py` | VLM 架构、ViT+Projector+LLM、冻结策略、训练优化、评估方法、面试题 |
+| VLM | Qwen3-VL 中文微调 | `train_qwen3vl_chinese.sh` | ALLaVA-Chinese 625K 数据、LoRA 微调、8卡 ZeRO-2 训练 |
+| VLM | 中文数据准备 | `prepare_allava_chinese.py` | ALLaVA-Chinese 路径修复、图片过滤、训练/验证集划分 |
+| VLM | 模型定性测试 | `test_qwen3vl_chinese.py` | 加载 base+LoRA、随机抽验证样本、对比参考答案 |
+
 
 ## 面试高频考点速查
 - Transformer 为什么用 scaled dot-product attention？
@@ -43,3 +53,8 @@
 - Agent 和 RAG 的关系？
 - ReAct 范式的流程是什么？
 - Multi-Agent 有哪些常见架构？
+- VLM 是怎么让 LLM 看懂图片的？（ViT + Projector + LLM）
+- 微调 VLM 时为什么一般冻结 ViT？
+- VLM 训练显存波动大的原因？
+- 什么是多模态幻觉？怎么缓解？
+- LoRA 微调 VLM 和全量微调相比的优缺点？
